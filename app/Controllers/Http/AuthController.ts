@@ -35,7 +35,7 @@ export default class AuthController {
     };
   }
 
-  public async dashboard({ auth, response }: HttpContextContract) {
+  public async me({ auth, response }: HttpContextContract) {
     return {
       current_user: auth.user?.toJSON()
     };

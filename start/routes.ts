@@ -27,4 +27,4 @@ Route.get('/', async () => {
 Route.post('login', 'AuthController.login');
 Route.post('register', 'AuthController.register');
 Route.post('logout', 'AuthController.logout');
-Route.get('me', 'AuthController.dashboard').middleware('auth:api');
+Route.get('me', 'AuthController.me').middleware('auth:api');
