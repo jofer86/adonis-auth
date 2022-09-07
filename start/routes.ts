@@ -18,48 +18,13 @@
 |
 */
 
-import Route from '@ioc:Adonis/Core/Route'
-import User from 'App/Models/User'
+import Route from '@ioc:Adonis/Core/Route';
 
 Route.get('/', async () => {
-  return { hello: 'world' }
-})
+  return { hello: 'world' };
+});
 
-Route.post('login', async ({ auth, request, response }) => {
-  const email = request.input('email')
-  const password = request.input('password')
-
-  try {
-    const token = await auth.use('api').attempt(email, password, {
-      expiresIn: '7 days'
-    })
-    return token
-  } catch {
-    return response.unauthorized('Invalid credentials')
-  }
-})
-
-Route.post('register', async({  auth, request, response }) => {
-  const email = request.input('email');
-  const password = request.input('password');
-
-  const user = await User.create({
-    email,
-    password
-  });
-
-  return user.toJSON();
-})
-
-Route.post('/logout', async ({ auth, response }) => {
-  await auth.use('api').revoke()
-  return {
-    revoked: true
-  }
-})
-
-Route.get('dashboard', () => {
-  return {
-    hola: 'perro'
-  }
-}).middleware('auth');
+Route.post('login', 'AuthController.login');
+Route.post('register', 'AuthController.register');
+Route.post('logout', 'AuthController.logout');
+Route.get('dashboard', 'AuthController.dashboard').middleware('auth:api');
