@@ -10,7 +10,10 @@ export default class AuthController {
       const token = await auth.use('api').attempt(email, password, {
         expiresIn: '7 days'
       });
-      return token;
+      return {
+        email: auth.user?.email,
+        token: token.toJSON()
+      };
     } catch {
       return response.unauthorized('Invalid credentials');
     }
