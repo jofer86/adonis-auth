@@ -36,9 +36,8 @@ export default class AuthController {
   }
 
   public async dashboard({ auth, response }: HttpContextContract) {
-    console.log(auth.user);
     return {
-      hola: 'perro'
+      current_user: auth.user?.toJSON()
     };
   }
 }
