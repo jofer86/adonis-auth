@@ -1,4 +1,4 @@
 export class User {
-  email!: string;
-  token?: string;
+  public email!: string
+  public token?: string
 }
