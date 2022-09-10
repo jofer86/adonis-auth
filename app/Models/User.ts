@@ -15,6 +15,36 @@ export default class User extends BaseModel {
   @column()
   public rememberMeToken?: string
 
+  @column()
+  public last_name: string
+
+  @column()
+  public first_name: string
+
+  @column()
+  public company_name: string
+
+  @column()
+  public phone_number: string
+
+  @column()
+  public address: string
+
+  @column()
+  public city: string
+
+  @column()
+  public state: string
+
+  @column()
+  public zip_code: string
+
+  @column()
+  public country: string
+
+  @column()
+  public website: string
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
