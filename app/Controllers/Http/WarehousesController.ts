@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import Warehouse from 'App/Models/Warehouse'
@@ -14,9 +13,9 @@ export default class WarehousesController {
     const address = req.input('address')
     const city = req.input('city')
     const state = req.input('state')
-    const zip_code = req.input('zip_code')
+    const zipCode = req.input('zip_code')
     const country = req.input('country')
-    const phone_number = req.input('phone_number')
+    const phoneNumber = req.input('phone_number')
     const email = req.input('email')
     const website = req.input('website')
 
@@ -28,11 +27,11 @@ export default class WarehousesController {
       city,
       email,
       state,
-      zip_code,
+      zipCode,
       country,
-      phone_number,
+      phoneNumber,
       website,
-      user_id: user.id,
+      userId: user.id,
     })
 
     return warehouse.toJSON()
@@ -50,9 +49,9 @@ export default class WarehousesController {
     const address = req.input('address')
     const city = req.input('city')
     const state = req.input('state')
-    const zip_code = req.input('zip_code')
+    const ziCode = req.input('zip_code')
     const country = req.input('country')
-    const phone_number = req.input('phone_number')
+    const phoneNumber = req.input('phone_number')
     const email = req.input('email')
     const website = req.input('website')
 
@@ -62,9 +61,9 @@ export default class WarehousesController {
       warehouse.address = address
       warehouse.city = city
       warehouse.state = state
-      warehouse.zip_code = zip_code
+      warehouse.zipCode = ziCode
       warehouse.country = country
-      warehouse.phone_number = phone_number
+      warehouse.phoneNumber = phoneNumber
       warehouse.email = email
       warehouse.website = website
       await warehouse.save()

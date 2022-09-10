@@ -1,5 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Item from 'App/Models/Item'
+import Product from 'App/Models/Product'
 import Warehouse from 'App/Models/Warehouse'
 
 export default class ItemsController {
@@ -10,17 +11,25 @@ export default class ItemsController {
 
   public async create({ request: req }: HttpContextContract) {
     const warehouseId = req.input('warehouse_id')
-    if (warehouseId) {
-      const warehouse = await Warehouse.find(warehouseId)
-      if (!warehouse) return new Error('Warehouse not found')
-      warehouse.related('items').create({
-        name: req.input('name'),
-        description: req.input('description'),
-        quantity: req.input('quantity'),
-        manufacturer: req.input('manufacturer'),
-        serial_number: req.input('serial_number'),
-      })
-    }
+    const productId = req.input('product_id')
+    let warehouse = await Warehouse.find(warehouseId)
+    let product = await Product.find(productId)
+    console.log(product)
+
+    if (!warehouse || !product) return new Error('Warehouse or Product not found')
+
+    console.log('not here')
+
+    const item = await Item.create({
+      price: req.input('price'),
+      quantity: req.input('quantity'),
+      productId: req.input('product_id'),
+      warehouseId: req.input('warehouse_id'),
+    })
+    console.log(item)
+
+    if (item) return item.toJSON()
+    return { error: 'Item not created' }
   }
 
   public async show({}: HttpContextContract) {
