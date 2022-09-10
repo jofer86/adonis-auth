@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, hasMany, HasMany, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
 import Item from './Item'
 import User from './User'
 
@@ -36,6 +36,9 @@ export default class Warehouse extends BaseModel {
 
   @column()
   public userId: number
+
+  @belongsTo(() => User)
+  public author: BelongsTo<typeof User>
 
   @hasMany(() => Item)
   public items: HasMany<typeof Item>

@@ -24,6 +24,8 @@ export default class ItemsController {
       warehouseId: req.input('warehouse_id'),
     })
 
+    console.log(await warehouse.related('items').query())
+
     if (item) return item.toJSON()
     return { error: 'Item not created' }
   }
