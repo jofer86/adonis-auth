@@ -14,11 +14,8 @@ export default class ItemsController {
     const productId = req.input('product_id')
     let warehouse = await Warehouse.find(warehouseId)
     let product = await Product.find(productId)
-    console.log(product)
 
     if (!warehouse || !product) return new Error('Warehouse or Product not found')
-
-    console.log('not here')
 
     const item = await Item.create({
       price: req.input('price'),
@@ -26,7 +23,6 @@ export default class ItemsController {
       productId: req.input('product_id'),
       warehouseId: req.input('warehouse_id'),
     })
-    console.log(item)
 
     if (item) return item.toJSON()
     return { error: 'Item not created' }
