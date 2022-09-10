@@ -20,7 +20,7 @@ export default class AuthController {
     }
   }
 
-  public async register({ auth, request, response }: HttpContextContract) {
+  public async register({ request }: HttpContextContract) {
     const email = request.input('email')
     const password = request.input('password')
     const last_name = request.input('last_name')
@@ -52,14 +52,14 @@ export default class AuthController {
     return user.toJSON()
   }
 
-  public async logout({ auth, response }: HttpContextContract) {
+  public async logout({ auth }: HttpContextContract) {
     await auth.use('api').revoke()
     return {
       revoked: true,
     }
   }
 
-  public async me({ auth, response }: HttpContextContract) {
+  public async me({ auth }: HttpContextContract) {
     return {
       current_user: auth.user?.toJSON(),
     }

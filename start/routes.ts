@@ -18,13 +18,11 @@
 |
 */
 
-import Route from '@ioc:Adonis/Core/Route';
+import Route from '@ioc:Adonis/Core/Route'
+import '../routes/auth.routes'
+import '../routes/warehouse.routes'
+import '../routes/item.routes'
 
 Route.get('/', async () => {
-  return { hello: 'world' };
-});
-
-Route.post('login', 'AuthController.login');
-Route.post('register', 'AuthController.register');
-Route.post('logout', 'AuthController.logout');
-Route.get('me', 'AuthController.me').middleware('auth:api');
+  return { hello: 'world' }
+})

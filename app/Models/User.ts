@@ -1,6 +1,16 @@
 import { DateTime } from 'luxon'
 import Hash from '@ioc:Adonis/Core/Hash'
-import { column, beforeSave, BaseModel } from '@ioc:Adonis/Lucid/Orm'
+import {
+  column,
+  beforeSave,
+  BaseModel,
+  hasMany,
+  HasMany,
+  HasManyThrough,
+  hasManyThrough,
+} from '@ioc:Adonis/Lucid/Orm'
+import Warehouse from './Warehouse'
+import Item from './Item'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -16,16 +26,16 @@ export default class User extends BaseModel {
   public rememberMeToken?: string
 
   @column()
-  public last_name: string
+  public lastName: string
 
   @column()
-  public first_name: string
+  public firstName: string
 
   @column()
-  public company_name: string
+  public companyName: string
 
   @column()
-  public phone_number: string
+  public phoneNumber: string
 
   @column()
   public address: string
@@ -37,13 +47,19 @@ export default class User extends BaseModel {
   public state: string
 
   @column()
-  public zip_code: string
+  public zipCode: string
 
   @column()
   public country: string
 
   @column()
   public website: string
+
+  @hasMany(() => Warehouse)
+  public warehouses: HasMany<typeof Warehouse>
+
+  @hasManyThrough([() => Item, () => Warehouse])
+  public items: HasManyThrough<typeof Item>
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
@@ -52,7 +68,7 @@ export default class User extends BaseModel {
   public updatedAt: DateTime
 
   @beforeSave()
-  public static async hashPassword (User: User) {
+  public static async hashPassword(User: User) {
     if (User.$dirty.password) {
       User.password = await Hash.make(User.password)
     }

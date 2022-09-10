@@ -19,11 +19,12 @@ export default class UsersSchema extends BaseSchema {
       table.string('zip_code', 255).nullable()
       table.string('country', 255).nullable()
       table.string('website', 255).nullable()
+
       /**
        * Uses timestampz for PostgreSQL and DATETIME2 for MSSQL
        */
-      table.timestamp('created_at', { useTz: true }).notNullable()
-      table.timestamp('updated_at', { useTz: true }).notNullable()
+      table.timestamp('created_at', { useTz: true })
+      table.timestamp('updated_at', { useTz: true })
     })
   }
 
